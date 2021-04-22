@@ -8,3 +8,33 @@
 
 ## 新しく追加したパッケージを共有したい場合
 - ```pip freeze > requirements.txt```
+
+## ファイル構成
+
+<pre>
+.
+├── coursemanagement
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py（ウェブアプリケーションの設定)
+│   ├── urls.py(URLとビューを結びつけるためのファイル)
+│   └── wsgi.py(デプロイするときに使う)
+└── manage.py(管理コマンド,開発サーバーを起動したり、データベースのマイグレーションなどを行う)
+└── managementapp
+    ├── __init__.py
+    ├── admin.py(Djanogの管理サイトにこのアプリケーションを登録するときに使う)
+    ├── apps.py(アプリケーションの設定を行う)
+    ├── migrations
+    │   └── __init__.py
+    ├── models.py(このアプリケーションのモデル,データを保存したり、データベースとやり取りする)
+    ├── tests.py(テストを記述する)
+    └── views.py(URLにリクエストが来たときに対応する処理を記述する,いわゆるコントローラーにあたる)
+</pre>
+
+
+
+
+
+
+
+
