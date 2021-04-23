@@ -49,7 +49,7 @@ class User(models.Model):
     )
 
     obtainedu_unit = models.IntegerField(
-      verbose_name='取得単位',
+        verbose_name='取得単位',
     )
 
 
