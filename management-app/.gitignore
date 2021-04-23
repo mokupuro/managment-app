@@ -12,3 +12,7 @@ pyvenv.cfg
 pip-selfcheck.json
 
 .vscode
+__pycache__
+*.py[co]
+db.sqlite3
+env
