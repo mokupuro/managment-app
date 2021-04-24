@@ -15,8 +15,8 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="{% url 'index' %}">ホームページ名</a>
+    <nav class="navbar navbar-expand-lg navbar-light" style = "background-color: #CCFFCC;">
+      <a class="navbar-brand font-weight-bold" href="{% url 'index' %}">Unit_tracking</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -25,19 +25,19 @@
         <ul class="navbar-nav mr-auto">
           {% if user.is_authenticated %}
           <li>
-            <a class="nav-item nav-link" href="{% url 'user_detail' user.pk %}">ユーザー情報閲覧</a>
+            <a class="font-weight-bold nav-link" href="{% url 'user_detail' user.pk %}">ユーザー情報閲覧</a>
           </li>
           <li>
-            <a class="nav-item nav-link" href="{% url 'user_update' user.pk %}">ユーザー情報更新</a>
+            <a class="font-weight-bold nav-link" href="{% url 'user_update' user.pk %}">ユーザー情報更新</a>
           </li>
           <li>
-            <a class="nav-item nav-link" href="{% url 'logout' %}">ログアウト</a>
+            <a class="font-weight-bold nav-link" href="{% url 'logout' %}">ログアウト</a>
           </li>
           {% else %}
           <li class="nav-item">
-            <a class="nav-item nav-link" href="{% url 'login' %}">
-            ようこそ、ゲスト！ログインはこちら
-          </a>
+            <a class="font-weight-bold nav-link" href="{% url 'login' %}">
+            ログインはこちら
+            </a>
           </li>
           {% endif %}
         </ul>
