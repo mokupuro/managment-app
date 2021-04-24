@@ -5,58 +5,6 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 
-# Create your models here.
-class User(models.Model):
-
-    UNDERGRADUATE_CHOICES = (
-        (1, '経済学部'),
-        (2, '法学部'),
-        (3, '文学部'),
-        (4, '外国語学部'),
-        (5, '教育学部'),
-    )
-
-    COURCE_CHOICES = (
-        (1, '経済学科'),
-        (2, '国際経済学科'),
-        (3, '経営学科'),
-        (4, '観光経営学科'),
-        (5, '法律学科'),
-        (6, '政治学科'),
-        (7, '日本文化学科'),
-        (8, '史学科'),
-        (9, '社会学科'),
-        (10, '心理学科'),
-        (11, '外国語学科'),
-        (12, '教育文化学科'),
-        (13, '初等教育学科'),
-    )
-
-    name = models.CharField(
-        verbose_name='名前',
-        max_length=200,
-    )
-
-    created_at = models.DateTimeField(
-        verbose_name='登録日',
-        auto_now_add=True
-    )
-
-    undergraduate = models.IntegerField(
-        verbose_name='学部',
-        choices=UNDERGRADUATE_CHOICES,
-        default=1,
-    )
-
-    cource = models.IntegerField(
-        verbose_name='学科',
-        choices=COURCE_CHOICES,
-    )
-
-    obtainedu_unit = models.IntegerField(
-        verbose_name='取得単位',
-    )
-
 
 class Syllabus(models.Model):
 
@@ -146,13 +94,62 @@ class CustomUserManager(UserManager):
         return self._create_user(email, password, **extra_fields)
 
 
-class UserRegistration(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin):
     """カスタムユーザーモデル."""
 
+    UNDERGRADUATE_CHOICES = (
+        (1, '経済学部'),
+        (2, '法学部'),
+        (3, '文学部'),
+        (4, '外国語学部'),
+        (5, '教育学部'),
+    )
+
+    COURCE_CHOICES = (
+        (1, '経済学科'),
+        (2, '国際経済学科'),
+        (3, '経営学科'),
+        (4, '観光経営学科'),
+        (5, '法律学科'),
+        (6, '政治学科'),
+        (7, '日本文化学科'),
+        (8, '史学科'),
+        (9, '社会学科'),
+        (10, '心理学科'),
+        (11, '外国語学科'),
+        (12, '教育文化学科'),
+        (13, '初等教育学科'),
+    )
 
     email = models.EmailField(_('email address'), unique=True)
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=150, blank=True)
+    name = models.CharField(
+        verbose_name='名前',
+        max_length=200,
+    )
+
+    created_at = models.DateTimeField(
+        verbose_name='登録日',
+        auto_now_add=True
+    )
+
+    undergraduate = models.IntegerField(
+        verbose_name='学部',
+        choices=UNDERGRADUATE_CHOICES,
+        default=1,
+    )
+
+    cource = models.IntegerField(
+        verbose_name='学科',
+        choices=COURCE_CHOICES,
+        default=1
+    )
+
+    obtainedu_unit = models.IntegerField(
+        verbose_name='取得単位',
+        null=True
+    )
 
     is_staff = models.BooleanField(
         _('staff status'),

@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import Login, Logout, UserCreate, UserCreateComplete, UserCreateDone, UserDetail, UserUpdate
-from .views import SyllabusListView, UserCreateView
+from .views import SyllabusListView 
 
 urlpatterns = [
 
@@ -16,7 +16,4 @@ urlpatterns = [
 
     # 一覧画面
     path('',  SyllabusListView.as_view(), name='index'),
-
-    # 登録画面
-    path('create/', UserCreateView.as_view(), name='create'),
 ]

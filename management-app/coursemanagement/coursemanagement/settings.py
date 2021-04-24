@@ -122,6 +122,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.normpath(os.path.join(BASE_DIR, "assets"))
+),
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -133,7 +136,7 @@ INSTALLED_APPS += ('crispy_forms', )
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 # カスタムユーザーモデルをデフォルトに設定
-AUTH_USER_MODEL = 'managementapp.UserRegistration'
+AUTH_USER_MODEL = 'managementapp.User'
 
 # ログインページ設定
 LOGIN_URL = 'login'
