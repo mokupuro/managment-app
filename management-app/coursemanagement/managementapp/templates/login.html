@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
- <h1 class = "login-title" style ="text-align:center; margin:20px 10px; ">単位管理アプリへようこそ！</h1>
+ <h1 class = "login-title text-lg-center mt-4 mb-4">単位管理アプリへようこそ！</h1>
 
-<div class="row card align-content-center" style = "width:55%; margin:0 auto; padding-top:20px;" >
+<div class="row card align-content-center pt-3" style = "width:55%; margin:0 auto;" >
     <!-- 左側、ログインエリア -->
     
     <div class="card-img-top col-md-8">
@@ -15,7 +15,7 @@
                     {{ field.errors }}
                     <hr>
                 {% endfor %}
-                <button type="submit" class="btn btn-success btn-lg btn-block" >ログイン!!</button>
+                <button type="submit" class="btn btn-success btn-lg btn-block" >ログイン</button>
                 <input type="hidden" name="next" value="{{ next }}" />
                 {% csrf_token %}
             </form>
