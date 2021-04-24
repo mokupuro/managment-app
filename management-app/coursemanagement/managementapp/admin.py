@@ -3,18 +3,18 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.utils.translation import ugettext_lazy
 
-from .models import User, Syllabus, UserRegistration
+from .models import User, Syllabus
 
 # Register your models here.
 class MyUserChangeForm(UserChangeForm):
     class Meta:
-        model = UserRegistration
+        model = User
         fields = '__all__'
 
 
 class MyUserCreationForm(UserCreationForm):
     class Meta:
-        model = UserRegistration
+        model = User
         fields = ('email',)
 
 
@@ -40,7 +40,6 @@ class MyUserAdmin(UserAdmin):
     ordering = ('email',)
 
 
-admin.site.register(UserRegistration, MyUserAdmin)
+admin.site.register(User, MyUserAdmin)
 
-admin.site.register(User)
 admin.site.register(Syllabus)

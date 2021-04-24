@@ -57,7 +57,10 @@ class UserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('last_name', 'first_name')
+        fields = ('name', 'undergraduate', 'cource', 'obtainedu_unit')
+        widgets = {
+            'name': forms.TextInput(attrs={'placeholder':'記入例：山田 太郎'}),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

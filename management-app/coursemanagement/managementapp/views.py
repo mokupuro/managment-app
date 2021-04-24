@@ -11,7 +11,7 @@ from django.views.generic.edit import CreateView
 from django.shortcuts import redirect, resolve_url
 
 from .models import User, Syllabus
-from .forms import UserForm, LoginForm, UserCreateForm, UserUpdateForm
+from .forms import UserForm, LoginForm, UserUpdateForm, UserCreateForm
 
 
 User = get_user_model()
@@ -31,17 +31,11 @@ class Logout(LogoutView):
 class SyllabusListView(ListView):
     model = Syllabus
 
-# 登録画面
-class UserCreateView(LoginRequiredMixin, CreateView):
-    model = User
-    form_class = UserForm
-    success_url = reverse_lazy('index')
-
 
 # ユーザー仮登録
 class UserCreate(CreateView):
     template_name = 'user_create.html'
-    form_class = UserCreateForm
+    form_class = User
 
     def form_valid(self, form):
         """仮登録と本登録用メールの発行."""
