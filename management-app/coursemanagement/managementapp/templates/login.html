@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
- <h1 class = "login-title text-lg-center mt-4 mb-4">単位管理アプリへようこそ！</h1>
+ <h1 class = "login-title text-lg-center mt-4 mb-4 col-12">単位管理アプリへようこそ！</h1>
 
-<div class="row card align-content-center pt-3" style = "width:55%; margin:0 auto;" >
+<div class="row align-content-center pt-3 ml-4 mr-4" style = " flex-direction: column;" >
     <!-- 左側、ログインエリア -->
     
-    <div class="card-img-top col-md-8">
+    <div class=" col-md-8">
         <div class="card-body">
             <form action="{% url 'login' %}" method="POST">
                 {{ form.non_field_errors }}
