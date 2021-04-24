@@ -1,25 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
-<table class="table">
+<table class="table ml-4" style = "width:90%;">
     <tbody>
         <tr>
-            <th>ユーザー名</th>
+            <th class = "h5 ml-3" style = "width:35%;">ユーザー名</th>
             <td>{{ user.email }}</td>
         </tr>
         <tr>
-            <th>name</th>
+            <th class = "h5 ml-3" style = "width:35%;">name</th>
             <td>{{ user.name }}</td>
         </tr>
         <tr>
-            <th>学部</th>
+            <th class = "h5 ml-3" style = "width:35%;">学部</th>
             <td>{{ user.get_undergraduate_display }}</td>
         </tr>
         <tr>
-            <th>学科</th>
+            <th class = "h5 ml-3" style = "width:35%;">学科</th>
             <td>{{ user.get_cource_display }}</td>
         </tr>
         <tr>
-            <th>取得単位</th>
+            <th class = "h5 ml-3" style = "width:35%;">取得単位</th>
             <td>{{ user.obtainedu_unit }}</td>
         </tr>
     </tbody>
