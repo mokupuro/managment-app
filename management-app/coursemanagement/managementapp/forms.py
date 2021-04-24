@@ -8,17 +8,6 @@ from django.contrib.auth import get_user_model
 from .models import User
 
 
-class UserForm(forms.ModelForm):
-
-    class Meta:
-        model = User
-        fields = ('name', 'undergraduate', 'cource', 'obtainedu_unit')
-        widgets = {
-            'name': forms.TextInput(attrs={'placeholder':'記入例：山田 太郎'}),
-            'undergraduate': forms.RadioSelect(),
-        }
-
-
 
 class LoginForm(AuthenticationForm):
     """ログインフォーム"""

@@ -3,15 +3,19 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import (
     LoginView, LogoutView
 )
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.signing import BadSignature, SignatureExpired, loads, dumps
 from django.contrib.auth import get_user_model, login
+from django.http import Http404, HttpResponseBadRequest
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, TemplateView, CreateView, UpdateView, DetailView
 from django.views.generic.edit import CreateView
+from django.template.loader import render_to_string
 from django.shortcuts import redirect, resolve_url
 
 from .models import User, Syllabus
-from .forms import UserForm, LoginForm, UserUpdateForm, UserCreateForm
+from .forms import LoginForm, UserUpdateForm, UserCreateForm
 
 
 User = get_user_model()
@@ -35,7 +39,7 @@ class SyllabusListView(ListView):
 # ユーザー仮登録
 class UserCreate(CreateView):
     template_name = 'user_create.html'
-    form_class = User
+    form_class = UserCreateForm
 
     def form_valid(self, form):
         """仮登録と本登録用メールの発行."""
@@ -55,11 +59,11 @@ class UserCreate(CreateView):
             'user': user,
         }
 
-        subject = render_to_string('register/mail_template/create/subject.txt', context)
-        message = render_to_string('register/mail_template/create/message.txt', context)
+        subject = render_to_string('mail_template/create/subject.txt', context)
+        message = render_to_string('mail_template/create/message.txt', context)
 
         user.email_user(subject, message)
-        return redirect('register:user_create_done')
+        return redirect('user_create_done')
 
 
 # ユーザー仮登録
