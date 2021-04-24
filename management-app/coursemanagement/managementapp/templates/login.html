@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="row">
+ <h1 class = "login-title text-lg-center mt-4 mb-4">単位管理アプリへようこそ！</h1>
+
+<div class="row card align-content-center pt-3" style = "width:55%; margin:0 auto;" >
     <!-- 左側、ログインエリア -->
-    <div class="card col-md-6">
+    
+    <div class="card-img-top col-md-8">
         <div class="card-body">
             <form action="{% url 'login' %}" method="POST">
                 {{ form.non_field_errors }}
@@ -20,10 +23,11 @@
     </div>
 
     <!-- 右側、会員登録エリア -->
-    <div class="card col-md-6">
-        <div class="card-body">
+    <div class = "col-md-8">
+         <div class="card-body">
             <a href="{% url 'user_create' %}" class="btn btn-success btn-lg btn-block" >会員登録</a>
-        </div>
+         </div>
     </div>
 </div>
+
 {% endblock %}
