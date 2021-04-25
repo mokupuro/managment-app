@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import Login, Logout, UserCreate, UserCreateComplete, UserCreateDone, UserDetail, UserUpdate
-from .views import SyllabusListView 
+from .views import SyllabusListView, listfunc 
 
 urlpatterns = [
 
@@ -15,5 +15,7 @@ urlpatterns = [
     path('user_update/<int:pk>/', UserUpdate.as_view(), name='user_update'),
 
     # 一覧画面
-    path('',  SyllabusListView.as_view(), name='index'),
+    path('', SyllabusListView.as_view(), name='index'),
+    
+    path('list/', listfunc, name='list')
 ]

@@ -1,0 +1,20 @@
+{% extends "base.html" %} 
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+  <div class="container text-center py-5">
+    <h1 class="mb-5" style="font-size: 2.4rem;">授業検索|シラバス</h1>
+    <form method="post" style="font-size: 26px">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <button class="btn-lg btn-success mt-3" type="submit">検索する</button>
+    </form>
+  </div>
+
+
+
+
+
+{% endblock %}

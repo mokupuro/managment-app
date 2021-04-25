@@ -14,11 +14,22 @@ from django.views.generic.edit import CreateView
 from django.template.loader import render_to_string
 from django.shortcuts import redirect, resolve_url
 
+import urllib.request
+import requests
+from bs4 import BeautifulSoup
+from selenium.webdriver.support.select import Select
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys as keys
+import chromedriver_binary
+
+
 from .models import User, Syllabus
 from .forms import LoginForm, UserUpdateForm, UserCreateForm
 
 
 User = get_user_model()
+url = "https://www.e-campus.gr.jp/syllabus/kanri/hachioji/public/syllabus/2021"
+driver = webdriver.Chrome()
 
 
 # ログインページ
@@ -31,9 +42,63 @@ class Login(LoginView):
 class Logout(LogoutView):
     template_name = 'base.html'
 
+
 # 一覧画面
-class SyllabusListView(ListView):
+class SyllabusListView(CreateView):
     model = Syllabus
+    fields = ('cource', 'others', 'semester', 'lecture_type')
+    success_url = reverse_lazy('list')
+
+
+# シラバスのスクレイピング
+
+def listfunc(request):
+    driver.get(url)
+
+    for post in Syllabus.objects.all():
+        cource = post.cource
+        others = post.others
+        semester = post.semester
+        lecture_type = post.lecture_type
+
+
+    list = []
+
+    el_discipline = driver.find_element_by_id("discipline-select")
+    el_others_grade = driver.find_element_by_id("q_others_grade_id")
+    el_semester = driver.find_element_by_id("q_semester_id_eq")
+    el_choice_type = driver.find_element_by_id("q_choice_type_id_eq")
+
+    print(cource, others, semester, lecture_type)
+    Select(el_discipline).select_by_value(str(cource))
+    Select(el_others_grade).select_by_value(str(others))
+    Select(el_semester).select_by_value(str(semester))
+    Select(el_choice_type).select_by_value(str(lecture_type))
+
+
+    el_choice_type.send_keys(keys.ENTER)
+
+    # sleep(5)
+
+    cur_url = driver.current_url
+    print(driver.current_url)
+    # driver.close()
+
+    # requestsでhtmlをダウンロード
+    response = requests.get(cur_url)
+    # # BeautifulSoupで解析、取り出し
+    bs = BeautifulSoup(response.content, "html.parser")
+
+
+    curriculums = bs.select("body > div.container > div.row > div.span12 > div.section > div.section-content > div.span6 > div > a")
+
+    for curriculum in curriculums:
+        list.append(curriculum.getText())
+
+    context = {'list': list}
+    print(context)
+
+    return render(request, 'list.html', context)
 
 
 # ユーザー仮登録
